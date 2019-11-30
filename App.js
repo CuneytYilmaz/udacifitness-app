@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+export default class App extends Component {
+  render () {
+    return (
+      <View style={styles.container}>
+        <Ionicons name='ios-pizza' color='green' size={200} />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
