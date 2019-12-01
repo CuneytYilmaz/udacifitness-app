@@ -5,6 +5,7 @@ import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
 import DateHeader from './DateHeader'
 import TextButton from './TextButton'
+import { submitEntry, removeEntry } from '../utils/api'
 import { Ionicons } from '@expo/vector-icons'
 
 function SubmitBtn ({ onPress }) {
@@ -70,7 +71,7 @@ export default class AddEntry extends Component {
 
         // Navigate to Home
 
-        // Save the "DB"
+        submitEntry({ key, entry })
 
         // Clear local notifications
 
@@ -83,7 +84,7 @@ export default class AddEntry extends Component {
 
         // Navigate to Home
 
-        // Save the "DB"
+        removeEntry(key)
     }
 
     render () {
