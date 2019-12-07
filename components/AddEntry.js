@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
     row: {
         flex: 1,
         flexDirection: 'row',
+        alignItems: 'center',
     },
     iosSubmitBtn: {
         backgroundColor: purple,
