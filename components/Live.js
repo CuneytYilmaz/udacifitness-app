@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { View, Text, ActivityIndicator, TouchableOpacity, StyleSheet } from 'react-native'
 import { Foundation } from '@expo/vector-icons'
 import { purple, white } from '../utils/colors'
-import { Location } from 'expo'
 import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 import { calculateDirection } from '../utils/helpers'
 
 class Live extends Component {
@@ -30,7 +30,17 @@ class Live extends Component {
     }
 
     askPermission = () => {
+        Permissions.askAsync(Permissions.LOCATION)
+            .then(({ status }) => {
+                if(status === 'granted') {
+                    return this.setLocation()
+                }
 
+                this.setState({ status })
+            })
+            .catch((error) => {
+                console.warn('Error asking Location permission: ', error)
+            })
     }
 
     setLocation = () => {
@@ -89,7 +99,7 @@ class Live extends Component {
                 <View style={styles.directionContainer} >
                     <Text style={styles.header}>You're heading</Text>
                     <Text style={styles.direction}>
-                        North
+                        {direction}
                     </Text>
                 </View>
                 <View style={styles.metricContainer}>
@@ -98,7 +108,7 @@ class Live extends Component {
                             Altitude
                         </Text>
                         <Text style={[styles.subHeader, {color: white}]}>
-                            {200} Feet
+                            {Math.round(coords.altitude * 3.2808)} Feet
                         </Text>
                     </View>
                     <View style={styles.metric} >
@@ -106,7 +116,7 @@ class Live extends Component {
                             Speed
                         </Text>
                         <Text style={[styles.subHeader, {color: white}]}>
-                            {300} MPH
+                            {(coords.speed * 2.2369).toFixed(1)} MPH
                         </Text>
                     </View>
                 </View>
