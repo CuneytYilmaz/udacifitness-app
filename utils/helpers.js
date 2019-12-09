@@ -168,7 +168,7 @@ export function isBetween (num, x, y) {
 
   export function clearLocalNotification () {
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
-      .then(Notifications.cancelAllScheduledNotificationsAsync())
+      .then(Notifications.cancelAllScheduledNotificationsAsync)
   }
 
   function createNotification () {

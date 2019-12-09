@@ -11,6 +11,7 @@ import { createAppContainer, createBottomTabNavigator, createMaterialTopTabNavig
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { purple, white } from './utils/colors'
 import Constants from 'expo-constants'
+import { setLocalNotification } from './utils/helpers'
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
@@ -87,6 +88,10 @@ const Stack = createStackNavigator({
 const MainNavigator = createAppContainer(Stack);
 
 export default class App extends Component {
+  componentDidMount () {
+    setLocalNotification()
+  }
+
   render () {
     return (
       <Provider store={createStore(reducer)} >
